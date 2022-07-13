@@ -38,7 +38,7 @@ def show_album_window():
         ]
     ]
 
-    album_window = sg.Window("Algum de Figurinhas", album_layout, element_justification='c')
+    album_window = sg.Window("Album de Figurinhas", album_layout, element_justification='c')
 
     while True: 
         event, values = album_window.read()
