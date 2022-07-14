@@ -52,7 +52,7 @@ while True:
         if (creditos >= 30):
             creditos -= 30
             page_index = rd.randint(0, album.total_pages - 1)
-            fig_index  = rd.randint(0, 5)
+            fig_index  = rd.randint(0, pr.num_fig_pg - 1)
 
             if not album.unables[page_index][fig_index]:
                 album.unables[page_index][fig_index] = True
