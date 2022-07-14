@@ -1,12 +1,35 @@
 import PySimpleGUI as sg
 from PIL import Image
 from param import Param as pr
+import pandas as pd
 
 class Album:
-    def __init__(self):
-        self.folders = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]  
+    def __init__(self, csv_name):
+        #self.file_name = csv_name
+
+        #self.folders = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+        df = pd.read_csv(csv_name)
+        df = df.sort_values(['folder', 'posicao'])
+        self.folders = df['folder'].unique()
+        self.folders = list(self.folders)
+        self.folders.sort()
         self.total_pages = len(self.folders)
-        
+
+        #indexes = df.index[df['folders']== i for i in self.folders].tolist()
+
+        self.names = [[] for i in range(self.total_pages)]
+        linha_atual = 0
+
+        for i in range(self.total_pages):
+            for j in range(pr.num_fig_pg):
+                self.names[i].append(df['jogador'][linha_atual])
+                linha_atual += 1
+
+        #print(self.names[0])
+
+
+
+
         disables = [False] * 12
 
         self.unables = []
@@ -62,38 +85,38 @@ def show_album_window(album: Album):
 
     column1_layout = [
         [sg.Image(source=source1, key="-IMAGE1-")],
-        [sg.Text("Jogador 1")],
+        [sg.Text(f"{album.names[0][0]}", key="-PLAYER1-")],
         [sg.Image(source=source5, key="-IMAGE5-")],
-        [sg.Text("Jogador 5")],
+        [sg.Text(f"{album.names[0][4]}")],
         [sg.Image(source=source9, key="-IMAGE9-")],
-        [sg.Text("Jogador 9")]
+        [sg.Text(f"{album.names[0][8]}")]
     ]
 
     column2_layout = [
         [sg.Image(source=source2, key="-IMAGE2-")],
-        [sg.Text("Jogador 2")],
+        [sg.Text(f"{album.names[0][1]}")],
         [sg.Image(source=source6, key="-IMAGE6-")],
-        [sg.Text("Jogador 6")],
+        [sg.Text(f"{album.names[0][5]}")],
         [sg.Image(source=source10, key="-IMAGE10-")],
-        [sg.Text("Jogador 10")]
+        [sg.Text(f"{album.names[0][9]}")]
     ]
 
     column3_layout = [
         [sg.Image(source=source3, key="-IMAGE3-")],
-        [sg.Text("Jogador 3")],
+        [sg.Text(f"{album.names[0][2]}")],
         [sg.Image(source=source7, key="-IMAGE7-")],
-        [sg.Text("Jogador 7")],
+        [sg.Text(f"{album.names[0][6]}")],
         [sg.Image(source=source11, key="-IMAGE11-")],
-        [sg.Text("Jogador 11")]
+        [sg.Text(f"{album.names[0][10]}")]
     ]
 
     column4_layout = [
         [sg.Image(source=source4, key="-IMAGE4-")],
-        [sg.Text("Jogador 4")],
+        [sg.Text(f"{album.names[0][3]}")],
         [sg.Image(source=source8, key="-IMAGE8-")],
-        [sg.Text("Jogador 8")],
+        [sg.Text(f"{album.names[0][7]}")],
         [sg.Image(source=source12, key="-IMAGE12-")],
-        [sg.Text("Jogador 12")]
+        [sg.Text(f"{album.names[0][11]}")]
     ]
     
 

@@ -30,7 +30,7 @@ layout = [
 
 window = sg.Window("Master Copa", layout, element_justification='c', font=pr.font)
 
-album = Album() # Create an album
+album = Album("test.csv") # Create an album
 msg_last_set = False
 
 while True: 
