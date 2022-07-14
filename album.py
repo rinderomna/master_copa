@@ -124,7 +124,7 @@ def show_album_window(album: Album):
     ]
     
     album_layout = [
-        [sg.Text("Página 1", key="-SHOW PAGE-"), sg.Text(f"- Time: {album.folders[0]}", key="-TIME-")],
+        [sg.Text(f"Time: {album.folders[0]}", key="-TIME-")],
 
         [
             sg.Column(column1_layout, element_justification="c"),
@@ -132,7 +132,7 @@ def show_album_window(album: Album):
             sg.Column(column3_layout, element_justification="c"),
             sg.Column(column4_layout, element_justification="c")
         ],
-
+        [sg.Text("Página 1", key="-SHOW PAGE-")],
         [sg.Button("<<<"), sg.Button(">>>")]
     ]
 
@@ -149,7 +149,7 @@ def show_album_window(album: Album):
             page_index = (page_index + 1) % total_pages
         
         album_window["-SHOW PAGE-"].update(f"Página {page_index + 1}")
-        album_window["-TIME-"].update(f"- Time: {album.folders[page_index]}")
+        album_window["-TIME-"].update(f"Time: {album.folders[page_index]}")
 
         resize_image(f"images/{album.folders[page_index]}/1.png", pr.width, pr.height)
         resize_image(f"images/{album.folders[page_index]}/2.png", pr.width, pr.height)
