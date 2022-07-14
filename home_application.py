@@ -15,9 +15,12 @@ def resize_image(filename, basewidth, height=None):
 
     img.save(filename)
 
+creditos = 0
+
 layout = [
     [sg.Text("O que deseja ver:")],
-    [sg.Button("Album"), sg.Button("Figurinhas"), sg.Button("Bozo")],
+    [sg.Button("Album"), sg.Button("Figurinhas"), sg.Button("Bozo"), sg.Button("Comprar Pacote")],
+    [sg.Text("Créditos: "), sg.Text(f"${creditos}", key="-CREDITOS-")],
     [sg.Button("Sair")]
 ]
 
@@ -28,6 +31,13 @@ def show_album_window(album: Album):
 
     total_pages = 10
     page_index = 0 # page_index = page_number - 1 [from 0 to (total_pages - 1)]
+
+    resize_image(f"images/1/1.png", 200, 350)
+    resize_image(f"images/1/2.png", 200, 350)
+    resize_image(f"images/1/3.png", 200, 350)
+    resize_image(f"images/1/4.png", 200, 350)
+    resize_image(f"images/1/5.png", 200, 350)
+    resize_image(f"images/1/6.png", 200, 350)
 
     album_layout = [
         [sg.Text("Página 1", key="-SHOW PAGE-")],
@@ -58,7 +68,7 @@ def show_album_window(album: Album):
             page_index = (page_index + 1) % total_pages
         
         album_window["-SHOW PAGE-"].update(f"Página {page_index + 1}")
-        
+
         resize_image(f"images/{album.folders[page_index]}/1.png", 200, 350)
         resize_image(f"images/{album.folders[page_index]}/2.png", 200, 350)
         resize_image(f"images/{album.folders[page_index]}/3.png", 200, 350)
@@ -82,5 +92,12 @@ while True:
         break
     elif event == "Album":
         show_album_window(album)
+    elif event == "Bozo":
+        creditos += 10
+    elif event == "Comprar Pacote":
+        if (creditos >= 30):
+            creditos -= 30
+
+    window["-CREDITOS-"].update(f"${creditos}")
 
 window.close()
