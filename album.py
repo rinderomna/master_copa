@@ -1,5 +1,6 @@
 import PySimpleGUI as sg
 from PIL import Image
+from param import Param as pr
 
 class Album:
     def __init__(self):
@@ -63,7 +64,7 @@ def show_album_window(album: Album):
         [sg.Button("<<<"), sg.Button(">>>")]
     ]
 
-    album_window = sg.Window("Album de Figurinhas", album_layout, element_justification='c')
+    album_window = sg.Window("Album de Figurinhas", album_layout, element_justification='c', font=pr.font)
 
     while True: 
         event, values = album_window.read()
@@ -111,8 +112,8 @@ def show_replicated_window(album: Album, original_window: sg.Window):
             key="-REPLICATED LIST-"
         )]
     ]
-
-    replicated_window = sg.Window("Figurinhas Repetidas", replicated_layout)
+    
+    replicated_window = sg.Window("Figurinhas Repetidas", replicated_layout, font = pr.font)
 
     while True:
         event, values = replicated_window.read()

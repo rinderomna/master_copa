@@ -4,6 +4,7 @@ from PIL import Image
 
 from album import *
 from figurinha import Figurinha
+from param import Param as pr
 
 def resize_image(filename, basewidth, height=None):
     img = Image.open(filename)
@@ -27,7 +28,7 @@ layout = [
     [sg.Button("Sair")]
 ]
 
-window = sg.Window("Master Copa", layout, element_justification='c')
+window = sg.Window("Master Copa", layout, element_justification='c', font=pr.font)
 
 album = Album() # Create an album
 msg_last_set = False
