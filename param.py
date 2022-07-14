@@ -5,3 +5,5 @@ class Param:
     height = 200
     num_fig_pg = 12
     spacement = "                            "
+    double_spacement = spacement * 2
+    cr_per_fig = 5 # creditos obtained by exchange a figurinha

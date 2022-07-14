@@ -205,7 +205,8 @@ def show_album_window(album: Album):
 
     album_window.close()
 
-def show_replicated_window(album: Album, original_window: sg.Window):
+def show_replicated_window(album: Album, original_window: sg.Window, initial_creditos: int):
+    new_creditos = initial_creditos
     values = []
     for replicated in album.replicated:
         values.append(f"Figurinha {replicated.page_index + 1}-{replicated.fig_index + 1} - qtd: {replicated.amount}")
@@ -218,7 +219,9 @@ def show_replicated_window(album: Album, original_window: sg.Window):
     ]
 
     col2_rep = [
-        [sg.Button("Trocar Selecionado")]
+        [sg.Button("Trocar Selecionado")],
+        [sg.Text("", key="-MSG-")],
+        [sg.Text(pr.double_spacement)]
     ]
 
     replicated_layout = [
@@ -231,15 +234,43 @@ def show_replicated_window(album: Album, original_window: sg.Window):
     
     replicated_window = sg.Window("Figurinhas Repetidas", replicated_layout, font = pr.font)
 
+    msg_last_set = False
+
     while True:
         event, values = replicated_window.read()
+
+        if msg_last_set:
+            replicated_window["-MSG-"].update("")
+            msg_last_set = False
+        
 
         if event == sg.WIN_CLOSED:
             break
         elif event == "Trocar Selecionado":
             selected_index = replicated_window.Element("-REPLICATED LIST-").Widget.curselection()
 
-            print(selected_index)
-            
+            if (len(selected_index) > 0): # Some figurinha is selected
+                i = selected_index[0]
+                album.replicated[i].amount -= 1
+                new_creditos += pr.cr_per_fig
+                original_window["-CREDITOS-"].update(f"${new_creditos}")
+
+                if album.replicated[i].amount == 0:
+                    album.replicated.pop(i)
+
+                replicated_window["-MSG-"].update(f"Você ganhou ${pr.cr_per_fig}.")
+                msg_last_set = True
+
+                values = []
+
+                for replicated in album.replicated:
+                    values.append(f"Figurinha {replicated.page_index + 1}-{replicated.fig_index + 1} - qtd: {replicated.amount}")
+
+                replicated_window["-REPLICATED LIST-"].update(values=values)
+            else:
+                replicated_window["-MSG-"].update("Nenhuma figurinha selecionada.")
+                msg_last_set = True
 
     replicated_window.close()
+    
+    return new_creditos

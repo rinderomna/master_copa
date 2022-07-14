@@ -47,7 +47,7 @@ while True:
     elif event == "Bozo":
         creditos += 10
     elif event == "Figurinhas":
-        show_replicated_window(album, window)
+        creditos = show_replicated_window(album, window, creditos)
     elif event == "Comprar Pacote":
         if (creditos >= 30):
             creditos -= 30
