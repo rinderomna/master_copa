@@ -85,38 +85,42 @@ def show_album_window(album: Album):
 
     column1_layout = [
         [sg.Image(source=source1, key="-IMAGE1-")],
-        [sg.Text(f"{album.names[0][0]}", key="-PLAYER1-")],
+        [sg.Text(f"{album.names[0][0]}", key="-PLAYER1-", font=pr.small_font)],
         [sg.Image(source=source5, key="-IMAGE5-")],
-        [sg.Text(f"{album.names[0][4]}", key="-PLAYER5-")],
+        [sg.Text(f"{album.names[0][4]}", key="-PLAYER5-", font=pr.small_font)],
         [sg.Image(source=source9, key="-IMAGE9-")],
-        [sg.Text(f"{album.names[0][8]}", key="-PLAYER9-")]
+        [sg.Text(f"{album.names[0][8]}", key="-PLAYER9-", font=pr.small_font)],
+        [sg.Text(pr.spacement)]
     ]
 
     column2_layout = [
         [sg.Image(source=source2, key="-IMAGE2-")],
-        [sg.Text(f"{album.names[0][1]}", key="-PLAYER2-")],
+        [sg.Text(f"{album.names[0][1]}", key="-PLAYER2-", font=pr.small_font)],
         [sg.Image(source=source6, key="-IMAGE6-")],
-        [sg.Text(f"{album.names[0][5]}", key="-PLAYER6-")],
+        [sg.Text(f"{album.names[0][5]}", key="-PLAYER6-", font=pr.small_font)],
         [sg.Image(source=source10, key="-IMAGE10-")],
-        [sg.Text(f"{album.names[0][9]}", key="-PLAYER10-")]
+        [sg.Text(f"{album.names[0][9]}", key="-PLAYER10-", font=pr.small_font)],
+        [sg.Text(pr.spacement)]
     ]
 
     column3_layout = [
         [sg.Image(source=source3, key="-IMAGE3-")],
-        [sg.Text(f"{album.names[0][2]}", key="-PLAYER3-")],
+        [sg.Text(f"{album.names[0][2]}", key="-PLAYER3-", font=pr.small_font)],
         [sg.Image(source=source7, key="-IMAGE7-")],
-        [sg.Text(f"{album.names[0][6]}", key="-PLAYER7-")],
+        [sg.Text(f"{album.names[0][6]}", key="-PLAYER7-", font=pr.small_font)],
         [sg.Image(source=source11, key="-IMAGE11-")],
-        [sg.Text(f"{album.names[0][10]}", key="-PLAYER11-")]
+        [sg.Text(f"{album.names[0][10]}", key="-PLAYER11-", font=pr.small_font)],
+        [sg.Text(pr.spacement)]
     ]
 
     column4_layout = [
         [sg.Image(source=source4, key="-IMAGE4-")],
-        [sg.Text(f"{album.names[0][3]}", key="-PLAYER4-")],
+        [sg.Text(f"{album.names[0][3]}", key="-PLAYER4-", font=pr.small_font)],
         [sg.Image(source=source8, key="-IMAGE8-")],
-        [sg.Text(f"{album.names[0][7]}", key="-PLAYER8-")],
+        [sg.Text(f"{album.names[0][7]}", key="-PLAYER8-", font=pr.small_font)],
         [sg.Image(source=source12, key="-IMAGE12-")],
-        [sg.Text(f"{album.names[0][11]}", key="-PLAYER12-")]
+        [sg.Text(f"{album.names[0][11]}", key="-PLAYER12-", font=pr.small_font)],
+        [sg.Text(pr.spacement)]
     ]
     
     album_layout = [
@@ -239,4 +243,3 @@ def show_replicated_window(album: Album, original_window: sg.Window):
             
 
     replicated_window.close()
-

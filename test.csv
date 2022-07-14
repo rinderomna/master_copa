@@ -12,7 +12,7 @@ folder,jogador,posicao
 1,Jogador11 t1,11
 1,Jogador12 t1,12
 2,Brasao,1
-2,Jogador2,2
+2,Jogador2 Felipe,2
 2,Jogador3,3
 2,Jogador4,4
 2,Jogador5,5
@@ -26,7 +26,7 @@ folder,jogador,posicao
 3,Brasao,1
 3,Jogador2,2
 3,Jogador3,3
-3,Jogador4,4
+3,Jogador4 Antonio,4
 3,Jogador5,5
 3,Jogador6,6
 3,Jogador7,7
@@ -40,7 +40,7 @@ folder,jogador,posicao
 4,Jogador3,3
 4,Jogador4,4
 4,Jogador5,5
-4,Jogador6,6
+4,Jogador6 Carlos,6
 4,Jogador7,7
 4,Jogador8,8
 4,Jogador9,9
@@ -55,7 +55,7 @@ folder,jogador,posicao
 5,Jogador6,6
 5,Jogador7,7
 5,Jogador8,8
-5,Jogador9,9
+5,Jogador9 Santana,9
 5,Jogador10,10
 5,Jogador11,11
 5,Jogador12,12
@@ -66,7 +66,7 @@ folder,jogador,posicao
 6,Jogador5,5
 6,Jogador6,6
 6,Jogador7,7
-6,Jogador8,8
+6,Jogador8 William,8
 6,Jogador9,9
 6,Jogador10,10
 6,Jogador11,11
@@ -81,7 +81,7 @@ folder,jogador,posicao
 7,Jogador8,8
 7,Jogador9,9
 7,Jogador10,10
-7,Jogador11,11
+7,Jogador11 Wolfgang,11
 7,Jogador12,12
 8,Brasao,1
 8,Jogador2,2
@@ -94,10 +94,10 @@ folder,jogador,posicao
 8,Jogador9,9
 8,Jogador10,10
 8,Jogador11,11
-8,Jogador12,12
+8,Jogador12 Amadeus,12
 9,Brasao,1
 9,Jogador2,2
-9,Jogador3,3
+9,Jogador3 Sven,3
 9,Jogador4,4
 9,Jogador5,5
 9,Jogador6,6
@@ -108,14 +108,14 @@ folder,jogador,posicao
 9,Jogador11,11
 9,Jogador12,12
 10,Brasao,1
-10,Jogador2,2
+10,Jogador2 Kasparov,2
 10,Jogador3,3
 10,Jogador4,4
 10,Jogador5,5
 10,Jogador6,6
 10,Jogador7,7
 10,Jogador8,8
-10,Jogador9,9
+10,Jogador9 Pedro,9
 10,Jogador10,10
 10,Jogador11,11
 10,Jogador12,12
