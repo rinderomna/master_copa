@@ -6,4 +6,7 @@ class Param:
     num_fig_pg = 12
     spacement = "                            "
     double_spacement = spacement * 2
+
     cr_per_fig = 5 # creditos obtained by exchange a figurinha
+    pkg_price = 30 
+    figs_per_pkg = 6

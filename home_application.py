@@ -24,7 +24,7 @@ layout = [
     [sg.Text("O que deseja ver:")],
     [sg.Button("Album"), sg.Button("Figurinhas"), sg.Button("Bozo"), sg.Button("Comprar Pacote")],
     [sg.Text("Créditos: "), sg.Text(f"${creditos}", key="-CREDITOS-")],
-    [sg.Text("", key="-MSG-")],
+    [sg.Text("\n", key="-MSG-")],
     [sg.Button("Sair")]
 ]
 
@@ -37,7 +37,7 @@ while True:
     event, values = window.read()
 
     if msg_last_set:
-        window["-MSG-"].update("")
+        window["-MSG-"].update("\n")
         msg_last_set = False
     
     if event == sg.WIN_CLOSED or event == "Sair":
@@ -49,29 +49,36 @@ while True:
     elif event == "Figurinhas":
         creditos = show_replicated_window(album, window, creditos)
     elif event == "Comprar Pacote":
-        if (creditos >= 30):
-            creditos -= 30
-            page_index = rd.randint(0, album.total_pages - 1)
-            fig_index  = rd.randint(0, pr.num_fig_pg - 1)
+        if (creditos >= pr.pkg_price):
+            creditos -= pr.pkg_price
 
-            if not album.unables[page_index][fig_index]:
-                album.unables[page_index][fig_index] = True
-                window["-MSG-"].update(f"Figurinha {page_index + 1}-{fig_index + 1} nova!")
-                msg_last_set = True
-            else:
-                replicated_figurinha = Figurinha(page_index, fig_index)
+            msg_new_figs = "    Novas Figurinhas: "
+            msg_rep_figs = "Figurinhas Repetidas: "
 
-                if replicated_figurinha in album.replicated:
-                    pass
-                    i = album.replicated.index(replicated_figurinha)
-                    album.replicated[i].amount += 1
+            for i in range(pr.figs_per_pkg):
+                page_index = rd.randint(0, album.total_pages - 1)
+                fig_index  = rd.randint(0, pr.num_fig_pg - 1)
+
+                if not album.unables[page_index][fig_index]:
+                    album.unables[page_index][fig_index] = True                        
+                    msg_new_figs += f"{page_index + 1}-{fig_index + 1} "
                 else:
-                    album.replicated.append(replicated_figurinha)
-                
-                window["-MSG-"].update(f"Figurinha {page_index + 1}-{fig_index + 1} já adquirida.")
+                    replicated_figurinha = Figurinha(page_index, fig_index)
+
+                    msg_rep_figs += f"{page_index + 1}-{fig_index + 1} "
+
+                    if replicated_figurinha in album.replicated:
+                        pass
+                        i = album.replicated.index(replicated_figurinha)
+                        album.replicated[i].amount += 1
+
+                    else:
+                        album.replicated.append(replicated_figurinha)
+                    
+                window["-MSG-"].update(msg_new_figs + "\n" + msg_rep_figs)
                 msg_last_set = True
         else:
-            window["-MSG-"].update(f"Saldo insuficiente, um pacote custa $30.")
+            window["-MSG-"].update(f"Saldo insuficiente, um pacote custa ${pr.pkg_price}.\n")
             msg_last_set = True
 
     window["-CREDITOS-"].update(f"${creditos}")
