@@ -28,7 +28,7 @@ winning_layout = [
 
 layout = [
     [sg.Text("O que deseja ver:")],
-    [sg.Button("Album"), sg.Button("Figurinhas"), sg.Button("Bozo"), sg.Button("Comprar Pacote")],
+    [sg.Button("Album"), sg.Button("Troca e Venda"), sg.Button("Bozo"), sg.Button("Comprar Pacote")],
     [sg.Text("Créditos: "), sg.Text(f"${creditos}", key="-CREDITOS-")],
     [sg.Text("\n", key="-MSG-")],
     [sg.Button("Sair")]
@@ -73,7 +73,7 @@ while True:
         show_album_window(album)
     elif event == "Bozo":
         creditos += 10
-    elif event == "Figurinhas":
+    elif event == "Troca e Venda":
         creditos = show_replicated_window(album, window, creditos)
     elif event == "Comprar Pacote":
         if (creditos >= pr.pkg_price):
