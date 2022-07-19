@@ -134,7 +134,7 @@ def show_album_window(album: Album):
 
     while True: 
         event, values = album_window.read()
-
+        
         if event == sg.WIN_CLOSED:
             break
         elif event == "<<<":
@@ -197,7 +197,7 @@ def show_album_window(album: Album):
         album_window["-PLAYER11-"].update(album.names[page_index][10])
         album_window["-PLAYER12-"].update(album.names[page_index][11])
 
-    album_window.close()
+    album_window.close()  
 
 def show_replicated_window(album: Album, original_window: sg.Window, initial_creditos: int):
     new_creditos = initial_creditos
