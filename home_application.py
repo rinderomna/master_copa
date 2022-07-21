@@ -4,6 +4,9 @@ from PIL import Image
 
 from album import *
 from figurinha import Figurinha
+import sys
+sys.path.insert(0, './bozo')
+from Bozo import Bozo
 from param import Param as pr
 
 def resize_image(filename, basewidth, height=None):
@@ -72,7 +75,8 @@ while True:
     elif event == "Album":
         show_album_window(album)
     elif event == "Bozo":
-        creditos += 10
+        b = Bozo()
+        creditos += b.lucro * 10
     elif event == "Troca e Venda":
         creditos = show_replicated_window(album, window, creditos)
     elif event == "Comprar Pacote":
