@@ -103,7 +103,7 @@ class Bozo :
 
 
     def criarTelaPrincipal(self, score) :
-        self.qtdRodadas = 9
+        self.qtdRodadas = 1
         self.qtdRoladas = 0
 
         while True :          
