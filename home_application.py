@@ -21,7 +21,7 @@ def resize_image(filename, basewidth, height=None):
 
     img.save(filename)
 
-creditos = 0
+creditos = 100000
 
 winning_layout = [
     [sg.Text("Parabéns!!! Você completou o Álbum da Copa!!!")],

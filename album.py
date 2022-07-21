@@ -212,8 +212,17 @@ def show_replicated_window(album: Album, original_window: sg.Window, initial_cre
         )]
     ]
 
+    pages = list(range(1, album.total_pages + 1))
+    positions = list(range(1, pr.num_fig_pg + 1))
+
     col2_rep = [
-        [sg.Button("Trocar Selecionado"), sg.Text("por:"), sg.InputText(size=(15,1))],
+        [
+            sg.Button("Trocar Selecionado"), 
+            sg.Text("por:"), 
+            sg.Combo(pages, default_value=str(pages[0]), readonly=True, key='page_change'),
+            sg.Text("-",font=pr.small_font),
+            sg.Combo(positions, default_value=str(positions[0]), readonly=True, key='position_change')
+        ],
         [sg.Button("Vender Selecionado")],
         
         [sg.Text("", key="-MSG-")],
@@ -269,9 +278,10 @@ def show_replicated_window(album: Album, original_window: sg.Window, initial_cre
                 msg_last_set = True
         elif event == "Trocar Selecionado":
             selected_index = replicated_window.Element("-REPLICATED LIST-").Widget.curselection()
+            new_fig_infos = [0, 0]
 
-            new_fig_infos = values[1].split('-')
-            print(new_fig_infos)
+            new_fig_infos[0] = int(values['page_change'])
+            new_fig_infos[1] = int(values['position_change'])
 
             if len(new_fig_infos) != 2:
                 replicated_window["-MSG-"].update(f"Má formatação. <pag>-<pos>")
