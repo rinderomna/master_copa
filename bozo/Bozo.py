@@ -50,11 +50,12 @@ class Bozo :
 
         if(self.qtdRoladas < 3) :
             layout.append(
-                [sg.Checkbox('Dado 1', key='0', default=False),
-                sg.Checkbox('Dado 2', key='1', default=False),
-                sg.Checkbox('Dado 3', key='2', default=False),
-                sg.Checkbox('Dado 4', key='3', default=False),
-                sg.Checkbox('Dado 5', key='4', default=False)         
+                [sg.Text(""),
+                sg.Checkbox('Dado 1      ', key='0', default=False),
+                sg.Checkbox('Dado 2     ', key='1', default=False),
+                sg.Checkbox('Dado 3     ', key='2', default=False),
+                sg.Checkbox('Dado 4     ', key='3', default=False),
+                sg.Checkbox('Dado 5      ', key='4', default=False)         
                 ]             
             )
             layout.append([sg.Button('Rolar dados')])
@@ -103,7 +104,7 @@ class Bozo :
 
 
     def criarTelaPrincipal(self, score) :
-        self.qtdRodadas = 9
+        self.qtdRodadas = 1
         self.qtdRoladas = 0
 
         while True :          

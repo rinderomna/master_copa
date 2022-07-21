@@ -25,9 +25,7 @@ class Placar :
             if(self.posicoes[i] == -1) :
                 disp.append(i + 1)
 
-        return disp
-    
-    
+        return disp  
 
     def inserirPlacar(self, posicao, dados) :
         vetDados = dados.getValoresDados()
@@ -35,7 +33,7 @@ class Placar :
         pontos = 0
         if posicao >= 0 and posicao <= 5 :
 
-            pontos = self.contaDados(posicao, vetDados)
+            pontos = self.contaDados(posicao, vetDados) * (posicao + 1)
         elif posicao == 6 :
             if(self.checkFull(vetDados)) :
                 pontos = 15
