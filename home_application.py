@@ -2,10 +2,6 @@ import random as rd
 import PySimpleGUI as sg
 from PIL import Image
 
-import sys
-sys.path.insert(0, './bozo')
-from Bozo import Bozo
-
 from album import *
 from figurinha import Figurinha
 from param import Param as pr
@@ -34,7 +30,7 @@ layout = [
 
 window = sg.Window("Master Copa", layout, element_justification='c', font=pr.font)
 
-album = Album() # Create an album
+album = Album("test.csv") # Create an album
 msg_last_set = False
 
 while True: 
@@ -49,15 +45,14 @@ while True:
     elif event == "Album":
         show_album_window(album)
     elif event == "Bozo":
-        b = Bozo()
-        creditos += b.lucro * 10
+        creditos += 10
     elif event == "Figurinhas":
         show_replicated_window(album, window)
     elif event == "Comprar Pacote":
         if (creditos >= 30):
             creditos -= 30
             page_index = rd.randint(0, album.total_pages - 1)
-            fig_index  = rd.randint(0, 5)
+            fig_index  = rd.randint(0, pr.num_fig_pg - 1)
 
             if not album.unables[page_index][fig_index]:
                 album.unables[page_index][fig_index] = True
