@@ -76,7 +76,7 @@ while True:
         window["-MSG-"].update("\n")
         msg_last_set = False
     elif event == "Salvar":
-        print("Salvando")
+        print("Salvando...")
         save_file = open('save.txt', 'w')
 
         save_file.write(str(creditos) + '\n')
