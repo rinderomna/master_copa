@@ -132,7 +132,7 @@ def show_album_window(album: Album):
         [sg.Button("<<<"), sg.Button(">>>")]
     ]
 
-    album_window = sg.Window("Album de Figurinhas", album_layout, element_justification='c', font=pr.font)
+    album_window = sg.Window("Álbum de Figurinhas", album_layout, element_justification='c', font=pr.font)
 
     while True: 
         event, values = album_window.read()
