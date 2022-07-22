@@ -49,7 +49,7 @@ winning_layout = [
 
 layout = [
     [sg.Menu(menu_def)],
-    [sg.Text("O que deseja ver:")],
+    [sg.Text("O que deseja ver:", font=pr.title_font)],
     [sg.Button("Álbum"), sg.Button("Troca e Venda"), sg.Button("Bozó"), sg.Button("Comprar Pacote")],
     [sg.Text("Créditos: "), sg.Text(f"${creditos}", key="-CREDITOS-")],
     [sg.Text("\n", key="-MSG-")],
@@ -204,6 +204,7 @@ while True:
             msg_last_set = True
 
     window["-CREDITOS-"].update(f"${creditos}")
+
 
 window.close()
 

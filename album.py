@@ -120,7 +120,7 @@ def show_album_window(album: Album):
     ]
     
     album_layout = [
-        [sg.Text(f"Time: {album.folders[0]}", key="-TIME-")],
+        [sg.Text(f"Time: {album.folders[0]}", key="-TIME-", font=pr.title_font)],
 
         [
             sg.Column(column1_layout, element_justification="c"),
@@ -128,7 +128,7 @@ def show_album_window(album: Album):
             sg.Column(column3_layout, element_justification="c"),
             sg.Column(column4_layout, element_justification="c")
         ],
-        [sg.Text("Página 1", key="-SHOW PAGE-")],
+        [sg.Text("Página 1", key="-SHOW PAGE-", font=pr.small_font)],
         [sg.Button("<<<"), sg.Button(">>>")]
     ]
 

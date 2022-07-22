@@ -1,4 +1,5 @@
 import PySimpleGUI as sg
+from ParamBozo import ParamBozo as pr
 
 class Placar :
     def __init__(self) :

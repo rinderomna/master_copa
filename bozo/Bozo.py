@@ -2,8 +2,9 @@ import PySimpleGUI as sg
 import Placar
 from RolaDados import *
 from PIL import Image
+from ParamBozo import ParamBozo as pr
 
-#sg.theme('DarkAmber')
+sg.theme('DarkAmber')
 
 class Bozo :
     def __init__(self) :
@@ -22,10 +23,10 @@ class Bozo :
         if(self.mainWindow != False) :
             self.mainWindow.close()
         colunas = score.getColunas()
-        layout = [[sg.Text('Jogo de Bozó')],
+        layout = [[sg.Text('Jogo de Bozó', font=pr.title_font)],
         [sg.Text('Quantidade de rodadas: '+ str(mostrarRodadas)+'/10')],
         [sg.Text('Placar: '+str(score.score))],
-        [sg.Text('     '), sg.Column(colunas[0], element_justification='left'),
+        [sg.Text('     '), sg.Column(colunas[0], element_justification='center'),
         sg.Column(colunas[1], element_justification='center'),
         sg.Column(colunas[2], element_justification='right')]]
 
@@ -34,7 +35,7 @@ class Bozo :
         else :
             layout.append([sg.Button("Finalizar jogo")])
 
-        self.mainWindow = sg.Window('Bozó', layout)
+        self.mainWindow = sg.Window('Bozó', layout, font=pr.font)
 
     def atualizaTelaDados(self, dados, score) :
         layout = [
@@ -51,11 +52,11 @@ class Bozo :
         if(self.qtdRoladas < 3) :
             layout.append(
                 [sg.Text(""),
-                sg.Checkbox('Dado 1      ', key='0', default=False),
-                sg.Checkbox('Dado 2     ', key='1', default=False),
-                sg.Checkbox('Dado 3     ', key='2', default=False),
-                sg.Checkbox('Dado 4     ', key='3', default=False),
-                sg.Checkbox('Dado 5      ', key='4', default=False)         
+                sg.Checkbox('Dado 1   ', key='0', default=False),
+                sg.Checkbox('Dado 2   ', key='1', default=False),
+                sg.Checkbox('Dado 3   ', key='2', default=False),
+                sg.Checkbox('Dado 4   ', key='3', default=False),
+                sg.Checkbox('Dado 5   ', key='4', default=False)         
                 ]             
             )
             layout.append([sg.Button('Rolar dados')])
@@ -72,10 +73,10 @@ class Bozo :
             )
 
         if(self.diceWindow == False) :            
-            self.diceWindow = sg.Window('Tela de dados', layout)
+            self.diceWindow = sg.Window('Tela de dados', layout, font=pr.font, element_justification='c')
         else :
             self.diceWindow.close()
-            self.diceWindow = sg.Window('Tela de dados', layout)
+            self.diceWindow = sg.Window('Tela de dados', layout, font=pr.font, element_justification='c')
 
     def telaDados(self, score) :
         dados = RolaDados()
@@ -122,7 +123,7 @@ class Bozo :
                         [sg.Text('Fim de jogo! Placar final: ' + str(score.score))],
                         [sg.Button('Sair')]
                     ]
-                    fimWindow = sg.Window('Fim', layout)
+                    fimWindow = sg.Window('Fim', layout, font=pr.font, element_justification='c')
                     event, values = fimWindow.read()
                     if(event == sg.WIN_CLOSED or event == 'Exit' or event == 'Sair') :
                         self.lucro = score.score
