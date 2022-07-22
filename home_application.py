@@ -38,7 +38,7 @@ def resize_image(filename, basewidth, height=None):
 
 creditos = 0
 
-menu_def = [['&Opções', ['&Salvar', '&Carregar Último Save', '&Reiniciar']]]
+menu_def = [['&Opções', ['&Salvar', '&Carregar Último Save', '&Reiniciar']],['&Ajuda', ['&Como Jogar']]]
 
 winning_layout = [
     [sg.Menu(menu_def)],
@@ -161,7 +161,9 @@ while True:
         album.replicated = []
 
         creditos = 0
-    if event == sg.WIN_CLOSED or event == "Sair":
+    elif event == "Como Jogar":
+        print('oi')
+    elif event == sg.WIN_CLOSED or event == "Sair":
         direct_exit_event = True
         break
     elif event == "Álbum":
@@ -220,3 +222,6 @@ if no_figurinha_missing and not direct_exit_event:
             break
     
     winning_window.close()
+
+    def show_how_to_play_window():
+        pass
