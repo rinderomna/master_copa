@@ -2,13 +2,12 @@
 Trabalho da disciplina de Programação Orientada a Objetos (SSC0103)
 Álbum de figurinhas com Bozó
 Grupo G16:
-Gabriela Bacarin Marcondes - N°USP: 10873351
-Hélio Nogueira Cardoso - N°USP: 10310227
-João Pedro Duarte Nunes - N°USP: 12542460
-Thaís Ribeiro Lauriano - N°USP: 12542518
+Gabriela Bacarin Marcondes - N°USP: 10873351 - 25% participação
+Hélio Nogueira Cardoso     - N°USP: 10310227 - 25% participação
+João Pedro Duarte Nunes    - N°USP: 12542460 - 25% participação
+Thaís Ribeiro Lauriano     - N°USP: 12542518 - 25% participação
 
 '''
-
 
 import random as rd
 from turtle import color
@@ -24,8 +23,10 @@ from param import Param as pr
 
 sg.theme(pr.theme)
 
+# Creating window to show how to play
+# Menu 'Ajuda' > 'Como Jogar'
 def show_how_to_play_window():
-    help_file = open('how_to_play.txt', 'r')
+    help_file = open('aux/how_to_play.txt', 'r')
 
     text = ""
 
