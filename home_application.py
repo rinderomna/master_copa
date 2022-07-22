@@ -26,13 +26,17 @@ def resize_image(filename, basewidth, height=None):
 
 creditos = 0
 
+menu_def = [['&Opções', ['&Salvar', '&Carregar Save']]]
+
 winning_layout = [
+    [sg.Menu(menu_def)],
     [sg.Text("Parabéns!!! Você completou o Álbum da Copa!!!")],
     [sg.Button("Álbum")],
     [sg.Button("Sair")]
 ]
 
 layout = [
+    [sg.Menu(menu_def)],
     [sg.Text("O que deseja ver:")],
     [sg.Button("Álbum"), sg.Button("Troca e Venda"), sg.Button("Bozó"), sg.Button("Comprar Pacote")],
     [sg.Text("Créditos: "), sg.Text(f"${creditos}", key="-CREDITOS-")],
@@ -71,7 +75,10 @@ while True:
     if msg_last_set:
         window["-MSG-"].update("\n")
         msg_last_set = False
-    
+    elif event == "Carregar Save":
+        save_file = open('save.txt', 'r')
+        n = save_file.readline()
+        
     if event == sg.WIN_CLOSED or event == "Sair":
         direct_exit_event = True
         break
