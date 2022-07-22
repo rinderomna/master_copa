@@ -26,7 +26,7 @@ def resize_image(filename, basewidth, height=None):
 
 creditos = 0
 
-menu_def = [['&Opções', ['&Salvar', '&Carregar Save']]]
+menu_def = [['&Opções', ['&Salvar', '&Carregar Último Save', '&Reiniciar']]]
 
 winning_layout = [
     [sg.Menu(menu_def)],
@@ -75,10 +75,80 @@ while True:
     if msg_last_set:
         window["-MSG-"].update("\n")
         msg_last_set = False
-    elif event == "Carregar Save":
+    elif event == "Salvar":
+        print("Salvando")
+        save_file = open('save.txt', 'w')
+
+        save_file.write(str(creditos) + '\n')
+
+        n_figs = 0
+
+        for page_index in range(album.total_pages):
+            for fig_index in range(pr.num_fig_pg):
+                if album.enables[page_index][fig_index]:
+                    n_figs += 1
+
+        save_file.write(str(n_figs) + '\n')
+
+        for page_index in range(album.total_pages):
+            for fig_index in range(pr.num_fig_pg):
+                if album.enables[page_index][fig_index]:
+                    save_file.write(str(page_index) + " " + str(fig_index) + '\n')
+
+        # Save replicated
+
+        save_file.write(str(len(album.replicated)) + '\n')
+
+        for replicated in album.replicated:
+            save_file.write(str(replicated.page_index) + " " + str(replicated.fig_index) + " " + str(replicated.amount) + '\n')
+
+        save_file.close()              
+    elif event == "Carregar Último Save":
         save_file = open('save.txt', 'r')
-        n = save_file.readline()
+
+        creditos = int(save_file.readline().strip())
+
+        n = int(save_file.readline().strip())
+
+        for page_index in range(album.total_pages):
+            for fig_index in range(pr.num_fig_pg):
+                album.enables[page_index][fig_index] = False
+
+        for i in range(n):
+            fig_page_index, fig_fig_index = save_file.readline().strip().split()
+
+            fig_page_index = int(fig_page_index)
+            fig_fig_index = int(fig_fig_index)
+            
+            album.enables[fig_page_index][fig_fig_index] = True
+
+        # Load replicated
+
+        album.replicated = []
+
+        n_replicated = int(save_file.readline().strip())
         
+        for i in range(n_replicated):
+            rep_page_index, rep_fig_index, amt = save_file.readline().strip().split()
+
+            rep_page_index = int(rep_page_index)
+            rep_fig_index = int(rep_fig_index)
+            amt = int(amt)
+
+            repl = Figurinha(rep_page_index, rep_fig_index)
+            repl.amount = amt
+
+            album.replicated.append(repl)
+
+        save_file.close()
+    elif event == "Reiniciar":
+        for page_index in range(album.total_pages):
+            for fig_index in range(pr.num_fig_pg):
+                album.enables[page_index][fig_index] = False
+
+        album.replicated = []
+
+        creditos = 0
     if event == sg.WIN_CLOSED or event == "Sair":
         direct_exit_event = True
         break
