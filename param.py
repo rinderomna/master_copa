@@ -1,4 +1,6 @@
 class Param:
+    theme = 'DarkAmber'
+
     font = ("Arial", 16)
     small_font = ("Arial", 12)
     width = 150

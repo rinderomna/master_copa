@@ -4,6 +4,8 @@ from param import Param as pr
 import pandas as pd
 from figurinha import Figurinha
 
+sg.theme(pr.theme)
+
 class Album:
     def __init__(self, csv_name):
         #self.file_name = csv_name

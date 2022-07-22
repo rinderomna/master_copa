@@ -1,4 +1,5 @@
 import random as rd
+from turtle import color
 import PySimpleGUI as sg
 from PIL import Image
 
@@ -8,6 +9,8 @@ import sys
 sys.path.insert(0, './bozo')
 from Bozo import Bozo
 from param import Param as pr
+
+sg.theme(pr.theme)
 
 def resize_image(filename, basewidth, height=None):
     img = Image.open(filename)
@@ -25,13 +28,13 @@ creditos = 0
 
 winning_layout = [
     [sg.Text("Parabéns!!! Você completou o Álbum da Copa!!!")],
-    [sg.Button("Album")],
+    [sg.Button("Álbum")],
     [sg.Button("Sair")]
 ]
 
 layout = [
     [sg.Text("O que deseja ver:")],
-    [sg.Button("Album"), sg.Button("Troca e Venda"), sg.Button("Bozo"), sg.Button("Comprar Pacote")],
+    [sg.Button("Álbum"), sg.Button("Troca e Venda"), sg.Button("Bozó"), sg.Button("Comprar Pacote")],
     [sg.Text("Créditos: "), sg.Text(f"${creditos}", key="-CREDITOS-")],
     [sg.Text("\n", key="-MSG-")],
     [sg.Button("Sair")]
@@ -72,9 +75,9 @@ while True:
     if event == sg.WIN_CLOSED or event == "Sair":
         direct_exit_event = True
         break
-    elif event == "Album":
+    elif event == "Álbum":
         show_album_window(album)
-    elif event == "Bozo":
+    elif event == "Bozó":
         b = Bozo()
         creditos += b.lucro * 10
     elif event == "Troca e Venda":
@@ -121,7 +124,7 @@ if no_figurinha_missing and not direct_exit_event:
     while True:
         event, values = winning_window.read()
 
-        if event == "Album":
+        if event == "Álbum":
             show_album_window(album)
         elif event == "Sair" or event == sg.WIN_CLOSED:
             break
