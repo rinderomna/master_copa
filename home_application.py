@@ -24,6 +24,26 @@ from param import Param as pr
 
 sg.theme(pr.theme)
 
+def show_how_to_play_window():
+    help_file = open('how_to_play.txt', 'r')
+
+    text = ""
+
+    for line in help_file:
+        text += line + '\n'
+
+    how_to_play_layout = [
+        [sg.Text(text), sg.Multiline()]
+    ]
+
+    window = sg.Window("Como Jogar", layout=how_to_play_layout)
+
+    while True:
+        event, values = window.read()
+
+        if event == sg.WIN_CLOSED:
+            break
+
 def resize_image(filename, basewidth, height=None):
     img = Image.open(filename)
     
@@ -162,7 +182,7 @@ while True:
 
         creditos = 0
     elif event == "Como Jogar":
-        print('oi')
+        show_how_to_play_window()
     elif event == sg.WIN_CLOSED or event == "Sair":
         direct_exit_event = True
         break
@@ -223,5 +243,3 @@ if no_figurinha_missing and not direct_exit_event:
     
     winning_window.close()
 
-    def show_how_to_play_window():
-        pass
