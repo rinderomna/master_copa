@@ -1,4 +1,17 @@
+'''
+Trabalho da disciplina de Programação Orientada a Objetos (SSC0103)
+Álbum de figurinhas com Bozó
+Grupo G16:
+Gabriela Bacarin Marcondes - N°USP: 10873351
+Hélio Nogueira Cardoso - N°USP: 10310227
+João Pedro Duarte Nunes - N°USP: 12542460
+Thaís Ribeiro Lauriano - N°USP: 12542518
+
+'''
+
+
 import random as rd
+from turtle import color
 import PySimpleGUI as sg
 from PIL import Image
 
@@ -8,6 +21,8 @@ import sys
 sys.path.insert(0, './bozo')
 from Bozo import Bozo
 from param import Param as pr
+
+sg.theme(pr.theme)
 
 def resize_image(filename, basewidth, height=None):
     img = Image.open(filename)
@@ -23,15 +38,19 @@ def resize_image(filename, basewidth, height=None):
 
 creditos = 0
 
+menu_def = [['&Opções', ['&Salvar', '&Carregar Último Save', '&Reiniciar']]]
+
 winning_layout = [
+    [sg.Menu(menu_def)],
     [sg.Text("Parabéns!!! Você completou o Álbum da Copa!!!")],
-    [sg.Button("Album")],
+    [sg.Button("Álbum")],
     [sg.Button("Sair")]
 ]
 
 layout = [
+    [sg.Menu(menu_def)],
     [sg.Text("O que deseja ver:")],
-    [sg.Button("Album"), sg.Button("Troca e Venda"), sg.Button("Bozo"), sg.Button("Comprar Pacote")],
+    [sg.Button("Álbum"), sg.Button("Troca e Venda"), sg.Button("Bozó"), sg.Button("Comprar Pacote")],
     [sg.Text("Créditos: "), sg.Text(f"${creditos}", key="-CREDITOS-")],
     [sg.Text("\n", key="-MSG-")],
     [sg.Button("Sair")]
@@ -39,7 +58,7 @@ layout = [
 
 window = sg.Window("Master Copa", layout, element_justification='c', font=pr.font)
 
-album = Album("test.csv") # Create an album
+album = Album("selecoes.csv") # Create an album
 msg_last_set = False
 
 no_figurinha_missing = True
@@ -68,13 +87,86 @@ while True:
     if msg_last_set:
         window["-MSG-"].update("\n")
         msg_last_set = False
-    
+    elif event == "Salvar":
+        print("Salvando...")
+        save_file = open('save.txt', 'w')
+
+        save_file.write(str(creditos) + '\n')
+
+        n_figs = 0
+
+        for page_index in range(album.total_pages):
+            for fig_index in range(pr.num_fig_pg):
+                if album.enables[page_index][fig_index]:
+                    n_figs += 1
+
+        save_file.write(str(n_figs) + '\n')
+
+        for page_index in range(album.total_pages):
+            for fig_index in range(pr.num_fig_pg):
+                if album.enables[page_index][fig_index]:
+                    save_file.write(str(page_index) + " " + str(fig_index) + '\n')
+
+        # Save replicated
+
+        save_file.write(str(len(album.replicated)) + '\n')
+
+        for replicated in album.replicated:
+            save_file.write(str(replicated.page_index) + " " + str(replicated.fig_index) + " " + str(replicated.amount) + '\n')
+
+        save_file.close()              
+    elif event == "Carregar Último Save":
+        save_file = open('save.txt', 'r')
+
+        creditos = int(save_file.readline().strip())
+
+        n = int(save_file.readline().strip())
+
+        for page_index in range(album.total_pages):
+            for fig_index in range(pr.num_fig_pg):
+                album.enables[page_index][fig_index] = False
+
+        for i in range(n):
+            fig_page_index, fig_fig_index = save_file.readline().strip().split()
+
+            fig_page_index = int(fig_page_index)
+            fig_fig_index = int(fig_fig_index)
+            
+            album.enables[fig_page_index][fig_fig_index] = True
+
+        # Load replicated
+
+        album.replicated = []
+
+        n_replicated = int(save_file.readline().strip())
+        
+        for i in range(n_replicated):
+            rep_page_index, rep_fig_index, amt = save_file.readline().strip().split()
+
+            rep_page_index = int(rep_page_index)
+            rep_fig_index = int(rep_fig_index)
+            amt = int(amt)
+
+            repl = Figurinha(rep_page_index, rep_fig_index)
+            repl.amount = amt
+
+            album.replicated.append(repl)
+
+        save_file.close()
+    elif event == "Reiniciar":
+        for page_index in range(album.total_pages):
+            for fig_index in range(pr.num_fig_pg):
+                album.enables[page_index][fig_index] = False
+
+        album.replicated = []
+
+        creditos = 0
     if event == sg.WIN_CLOSED or event == "Sair":
         direct_exit_event = True
         break
-    elif event == "Album":
+    elif event == "Álbum":
         show_album_window(album)
-    elif event == "Bozo":
+    elif event == "Bozó":
         b = Bozo()
         creditos += b.lucro * 10
     elif event == "Troca e Venda":
@@ -121,7 +213,7 @@ if no_figurinha_missing and not direct_exit_event:
     while True:
         event, values = winning_window.read()
 
-        if event == "Album":
+        if event == "Álbum":
             show_album_window(album)
         elif event == "Sair" or event == sg.WIN_CLOSED:
             break

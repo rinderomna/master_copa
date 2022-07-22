@@ -1,4 +1,6 @@
 class Param:
+    theme = 'DarkAmber'
+
     font = ("Arial", 16)
     small_font = ("Arial", 12)
     width = 150
@@ -7,7 +9,7 @@ class Param:
     spacement = "                            "
     double_spacement = spacement * 2
 
-    cr_per_fig = 5 # creditos obtained by exchange a figurinha
-    pkg_price = 30 
-    figs_per_pkg = 6
+    cr_per_fig = 25 # creditos obtained by exchange a figurinha
+    pkg_price = 150 
+    figs_per_pkg = 10
     figs_to_exchange = 5

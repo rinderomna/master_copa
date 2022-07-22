@@ -4,6 +4,8 @@ from param import Param as pr
 import pandas as pd
 from figurinha import Figurinha
 
+sg.theme(pr.theme)
+
 class Album:
     def __init__(self, csv_name):
         #self.file_name = csv_name
@@ -130,7 +132,7 @@ def show_album_window(album: Album):
         [sg.Button("<<<"), sg.Button(">>>")]
     ]
 
-    album_window = sg.Window("Album de Figurinhas", album_layout, element_justification='c', font=pr.font)
+    album_window = sg.Window("Álbum de Figurinhas", album_layout, element_justification='c', font=pr.font)
 
     while True: 
         event, values = album_window.read()
