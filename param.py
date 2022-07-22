@@ -14,5 +14,3 @@ class Param:
     pkg_price = 150
     figs_per_pkg = 10
     figs_to_exchange = 5
-
-   

@@ -33,7 +33,7 @@ def show_how_to_play_window():
         text += line + '\n'
 
     how_to_play_layout = [
-        [sg.Text(text), sg.Multiline()]
+        [sg.Multiline(text, size=(50,25), font=pr.font, background_color='white', text_color='black')]
     ]
 
     window = sg.Window("Como Jogar", layout=how_to_play_layout)
@@ -78,7 +78,7 @@ layout = [
 
 window = sg.Window("Master Copa", layout, element_justification='c', font=pr.font, size=(800,250))
 
-album = Album("selecoes.csv") # Create an album
+album = Album("aux/selecoes.csv") # Create an album
 msg_last_set = False
 
 no_figurinha_missing = True
@@ -109,7 +109,7 @@ while True:
         msg_last_set = False
     elif event == "Salvar":
         print("Salvando...")
-        save_file = open('save.txt', 'w')
+        save_file = open('aux/save.txt', 'w')
 
         save_file.write(str(creditos) + '\n')
 
@@ -136,7 +136,7 @@ while True:
 
         save_file.close()              
     elif event == "Carregar Último Save":
-        save_file = open('save.txt', 'r')
+        save_file = open('aux/save.txt', 'r')
 
         creditos = int(save_file.readline().strip())
 
