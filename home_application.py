@@ -39,7 +39,7 @@ layout = [
 
 window = sg.Window("Master Copa", layout, element_justification='c', font=pr.font)
 
-album = Album("test.csv") # Create an album
+album = Album("selecoes.csv") # Create an album
 msg_last_set = False
 
 no_figurinha_missing = True
