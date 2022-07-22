@@ -1,3 +1,15 @@
+'''
+Trabalho da disciplina de Programação Orientada a Objetos (SSC0103)
+Álbum de figurinhas com Bozó
+Grupo G16:
+Gabriela Bacarin Marcondes - N°USP: 10873351
+Hélio Nogueira Cardoso - N°USP: 10310227
+João Pedro Duarte Nunes - N°USP: 12542460
+Thaís Ribeiro Lauriano - N°USP: 12542518
+
+'''
+
+
 import random as rd
 from turtle import color
 import PySimpleGUI as sg
