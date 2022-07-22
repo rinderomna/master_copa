@@ -76,7 +76,7 @@ layout = [
     [sg.Button("Sair")]
 ]
 
-window = sg.Window("Master Copa", layout, element_justification='c', font=pr.font)
+window = sg.Window("Master Copa", layout, element_justification='c', font=pr.font, size=(800,250))
 
 album = Album("selecoes.csv") # Create an album
 msg_last_set = False
