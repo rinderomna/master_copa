@@ -40,11 +40,11 @@ class Bozo :
     def atualizaTelaDados(self, dados, score) :
         layout = [
             [sg.Text("Quantidade de vezes roladas: " + str(self.qtdRoladas) + "/3")],
-            [sg.Image(source=dados.dados[0].caminhoImagem),
-             sg.Image(source=dados.dados[1].caminhoImagem),
-             sg.Image(source=dados.dados[2].caminhoImagem),
-             sg.Image(source=dados.dados[3].caminhoImagem),
-             sg.Image(source=dados.dados[4].caminhoImagem),
+            [sg.Image(source=dados.dados[0].caminhoImagem, pad=pr.img_pad),
+             sg.Image(source=dados.dados[1].caminhoImagem, pad=pr.img_pad),
+             sg.Image(source=dados.dados[2].caminhoImagem, pad=pr.img_pad),
+             sg.Image(source=dados.dados[3].caminhoImagem, pad=pr.img_pad),
+             sg.Image(source=dados.dados[4].caminhoImagem, pad=pr.img_pad),
             ]
             
         ]
@@ -52,11 +52,11 @@ class Bozo :
         if(self.qtdRoladas < 3) :
             layout.append(
                 [sg.Text(""),
-                sg.Checkbox('Dado 1   ', key='0', default=False),
-                sg.Checkbox('Dado 2   ', key='1', default=False),
-                sg.Checkbox('Dado 3   ', key='2', default=False),
-                sg.Checkbox('Dado 4   ', key='3', default=False),
-                sg.Checkbox('Dado 5   ', key='4', default=False)         
+                sg.Checkbox('Dado 1', key='0', default=False),
+                sg.Checkbox('Dado 2', key='1', default=False),
+                sg.Checkbox('Dado 3', key='2', default=False),
+                sg.Checkbox('Dado 4', key='3', default=False),
+                sg.Checkbox('Dado 5', key='4', default=False)         
                 ]             
             )
             layout.append([sg.Button('Rolar dados')])

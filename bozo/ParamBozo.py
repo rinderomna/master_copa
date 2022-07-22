@@ -5,3 +5,5 @@ class ParamBozo:
     font = ("Arial", 16)
 
     dimensoes_dado = 150
+
+    img_pad = 11
