@@ -26,6 +26,7 @@ sg.theme(pr.theme)
 # Creating window to show how to play
 # Menu 'Ajuda' > 'Como Jogar'
 def show_how_to_play_window():
+    # Reading help text and saving to variable text
     help_file = open('aux/how_to_play.txt', 'r')
 
     text = ""
@@ -45,6 +46,7 @@ def show_how_to_play_window():
         if event == sg.WIN_CLOSED:
             break
 
+# Function to resize images to specified dimensions
 def resize_image(filename, basewidth, height=None):
     img = Image.open(filename)
     
@@ -57,10 +59,13 @@ def resize_image(filename, basewidth, height=None):
 
     img.save(filename)
 
+# Variable that stores how much creditos the users has
 creditos = 0
 
+# Menu with options to save, load save, reset and helping instructions
 menu_def = [['&Opções', ['&Salvar', '&Carregar Último Save', '&Reiniciar']],['&Ajuda', ['&Como Jogar']]]
 
+# Defining layout of the windows that appears when the user fills the album
 winning_layout = [
     [sg.Menu(menu_def)],
     [sg.Text("Parabéns!!! Você completou o Álbum da Copa!!!")],
@@ -68,6 +73,7 @@ winning_layout = [
     [sg.Button("Sair")]
 ]
 
+# defining layou of the main window
 layout = [
     [sg.Menu(menu_def)],
     [sg.Text("O que deseja ver:", font=pr.title_font)],
@@ -77,12 +83,19 @@ layout = [
     [sg.Button("Sair")]
 ]
 
+# Creating main window
 window = sg.Window("Master Copa", layout, element_justification='c', font=pr.font, size=(800,250))
 
-album = Album("aux/selecoes.csv") # Create an album
+# Create an album from csv file
+album = Album("aux/selecoes.csv")
+
+# Boolean variable that controls the appearance and disappearance of messages on window
 msg_last_set = False
 
+# Boolean variable, which is True after testing when the user has filled the album
 no_figurinha_missing = True
+
+# Boolean variable, which is True after a breaking loop when the user has clicked on 'Sair' or 'x' buttons.
 direct_exit_event = False
 
 while True: 
@@ -98,22 +111,29 @@ while True:
     except:
         pass
 
+    # If there album is filled, break main loop and go to winning window
     if no_figurinha_missing:
         break
 
+    # ----------------------------------           
+    
+    # Loop reading events and values from main window
+
     event, values = window.read()
 
-    # ----------------------------------           
-
+    # Erase the last message after it was set
     if msg_last_set:
         window["-MSG-"].update("\n")
         msg_last_set = False
     elif event == "Salvar":
+        # Save current state of the game in a file
         print("Salvando...")
         save_file = open('aux/save.txt', 'w')
 
+        # Saving Creditos
         save_file.write(str(creditos) + '\n')
 
+        # Saving number of figurinhas in the album
         n_figs = 0
 
         for page_index in range(album.total_pages):
@@ -123,13 +143,13 @@ while True:
 
         save_file.write(str(n_figs) + '\n')
 
+        # Saving each figurinha
         for page_index in range(album.total_pages):
             for fig_index in range(pr.num_fig_pg):
                 if album.enables[page_index][fig_index]:
                     save_file.write(str(page_index) + " " + str(fig_index) + '\n')
 
         # Save replicated
-
         save_file.write(str(len(album.replicated)) + '\n')
 
         for replicated in album.replicated:
@@ -137,16 +157,20 @@ while True:
 
         save_file.close()              
     elif event == "Carregar Último Save":
+        # Load last saved state of the game
         save_file = open('aux/save.txt', 'r')
 
+        # Load saved Creditos
         creditos = int(save_file.readline().strip())
 
         n = int(save_file.readline().strip())
 
+        # Reseting all figurinhas
         for page_index in range(album.total_pages):
             for fig_index in range(pr.num_fig_pg):
                 album.enables[page_index][fig_index] = False
 
+        # Load saved figurinhas
         for i in range(n):
             fig_page_index, fig_fig_index = save_file.readline().strip().split()
 
@@ -156,7 +180,6 @@ while True:
             album.enables[fig_page_index][fig_fig_index] = True
 
         # Load replicated
-
         album.replicated = []
 
         n_replicated = int(save_file.readline().strip())
@@ -175,26 +198,35 @@ while True:
 
         save_file.close()
     elif event == "Reiniciar":
+        # Reseting all figurinhas
         for page_index in range(album.total_pages):
             for fig_index in range(pr.num_fig_pg):
                 album.enables[page_index][fig_index] = False
 
+        # Reseting replicated
         album.replicated = []
 
+        # Reseting Creditos
         creditos = 0
     elif event == "Como Jogar":
+        # Show instructions window
         show_how_to_play_window()
     elif event == sg.WIN_CLOSED or event == "Sair":
+        # Direct Exit Command
         direct_exit_event = True
         break
     elif event == "Álbum":
+        # Show Álbum Manager Window
         show_album_window(album)
     elif event == "Bozó":
+        # Play a match of Bozó and update Creditos
         b = Bozo()
         creditos += b.lucro * 10
     elif event == "Troca e Venda":
+        # Show Selling and Exchanging Replicated Manager Window
         creditos = show_replicated_window(album, window, creditos)
     elif event == "Comprar Pacote":
+        # If there are enough Creditos, generate new figurinhas to the user
         if (creditos >= pr.pkg_price):
             creditos -= pr.pkg_price
 
@@ -226,11 +258,13 @@ while True:
             window["-MSG-"].update(f"Saldo insuficiente, um pacote custa ${pr.pkg_price}.\n")
             msg_last_set = True
 
+    # Update Creditos Display after each loop
     window["-CREDITOS-"].update(f"${creditos}")
-
 
 window.close()
 
+# If the closing event was due to the completion of the album (not direct exit event):
+# Then show winning window
 if no_figurinha_missing and not direct_exit_event:
     winning_window = sg.Window("Master Copa (Completo)", winning_layout, element_justification='c', font=pr.font)
     
