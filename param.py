@@ -13,4 +13,4 @@ class Param:
     cr_per_fig = 25 # creditos obtained by exchange a figurinha
     pkg_price = 150
     figs_per_pkg = 10
-    figs_to_exchange = 5
+    figs_to_exchange = 3
